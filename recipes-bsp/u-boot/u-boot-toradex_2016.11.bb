@@ -5,4 +5,4 @@ LOCALVERSION = "-2.8.3"
 
 PROVIDES += "u-boot"
 
-inherit fsl-u-boot-localversion dtc-145
+inherit fsl-u-boot-localversion

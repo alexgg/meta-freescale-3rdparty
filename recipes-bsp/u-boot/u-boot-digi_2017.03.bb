@@ -24,7 +24,7 @@ LOCALVERSION ?= "-${SRCBRANCH}"
 
 S = "${WORKDIR}/git"
 
-inherit dtc-145 fsl-u-boot-localversion
+inherit fsl-u-boot-localversion
 
 UBOOT_ENV = "boot"
 UBOOT_ENV_SUFFIX = "scr"
