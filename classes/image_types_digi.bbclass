@@ -40,6 +40,11 @@ IMAGE_CMD_boot.ubifs() {
 		ln "${orig}" "${TMP_BOOTDIR}/${UBOOT_BOOTSCRIPT}"
 	fi
 
+        # Copy extra files if needed
+        if [ -n "${RESIN_BOOT_WORKDIR}" ]; then
+            cp -r ${RESIN_BOOT_WORKDIR}/* "${TMP_BOOTDIR}"
+        fi
+
 	# Build UBIFS boot image out of temp folder
 	mkfs.ubifs -r "${TMP_BOOTDIR}" -o "${IMGDEPLOYDIR}/${IMAGE_NAME}.boot.ubifs" ${MKUBIFS_BOOT_ARGS}
 
