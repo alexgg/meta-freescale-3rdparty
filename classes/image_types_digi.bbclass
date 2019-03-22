@@ -4,6 +4,7 @@ do_image_boot_ubifs[depends] += " \
     mtd-utils-native:do_populate_sysroot \
     u-boot:do_deploy \
     virtual/kernel:do_deploy \
+    resin-image-initramfs:do_image_complete \
 "
 
 IMAGE_CMD_boot.ubifs() {
