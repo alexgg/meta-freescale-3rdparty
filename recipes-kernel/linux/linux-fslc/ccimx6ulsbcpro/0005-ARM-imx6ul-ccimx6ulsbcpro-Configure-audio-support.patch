@@ -1,0 +1,63 @@
+From 4878644680931d31191b6381888773b9a0a57e1a Mon Sep 17 00:00:00 2001
+From: Alex Gonzalez <alex.gonzalez@digi.com>
+Date: Mon, 20 May 2019 15:44:23 +0200
+Subject: [PATCH] ARM: imx6ul-ccimx6ulsbcpro: Configure audio support
+
+This commits adds support for the MAX98089 codec on the SBC Pro SBC.
+
+Signed-off-by: Alex Gonzalez <alex.gonzalez@digi.com>
+---
+ arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts | 33 +++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts b/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts
+index 3749fdda3611..854d8549ad9a 100644
+--- a/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts
++++ b/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts
+@@ -44,6 +44,29 @@
+ 		gpio = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+ 		enable-active-high;
+ 	};
++
++	sound_max98089: sound-max98089 {
++		compatible = "fsl,imx-audio-max98088";
++		model = "imx-max98088";
++		cpu-dai = <&sai2>;
++		audio-codec = <&max98089>;
++		asrc-controller = <&asrc>;
++		gpr = <&gpr>;
++		audio-routing =
++			"Headphone Jack", "HPL",
++			"Headphone Jack", "HPR",
++			"Ext Spk", "SPKL",
++			"Ext Spk", "SPKR",
++			"LineOut", "RECL",
++			"LineOut", "RECR",
++			"Mic1", "MIC1",
++			"Mic2", "MIC2",
++			"LineInA", "INA1",
++			"LineInA", "INA2",
++			"LineInB", "INB1",
++			"LineInB", "INB2";
++		status = "okay";
++	};
+ };
+ 
+ &adc1 {
+@@ -118,6 +141,16 @@
+ };
+ 
+ &i2c1 {
++	max98089: codec@10 {
++		compatible = "maxim,max98089";
++		reg = <0x10>;
++		clocks = <&clks IMX6UL_CLK_SAI2>;
++		clock-names = "mclk";
++		interrupt-parent = <&gpio5>;
++		interrupts = <7 IRQ_TYPE_EDGE_FALLING>;
++		status = "okay";
++	};
++
+ 	touchscreen@14 {
+ 		compatible = "goodix,gt911";
+ 		reg = <0x14>;
