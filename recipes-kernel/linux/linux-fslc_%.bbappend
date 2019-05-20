@@ -17,6 +17,14 @@ SRC_URI_append_ccimx6ul = " \
     file://0006-linux-crypto-caam-set-hwrng-quality.patch \
 "
 
+SRC_URI_append_ccimx6ulsbcpro = " \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0001-ARM-dts-i.MX6UL-Add-ASRC-support.patch', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0002-dt-bindings-ASoC-fsl-add-binding-for-imx-max98088-ma.patch', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0003-ASoC-fsl-Add-imx-max98088-machine-driver.patch', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0004-ARCH-arm-imx_v6_v7_defconfig-Support-MAX98088-codecs.patch', '', d)} \
+    ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0005-ARM-imx6ul-ccimx6ulsbcpro-Configure-audio-support.patch', '', d)} \
+"
+
 do_configure_prepend_ccimx6ul() {
     if ${@bb.utils.contains('MACHINE_FEATURES', 'wifi', 'true', 'false', d)}; then
         kernel_conf_variable HOSTAP m

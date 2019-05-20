@@ -1,0 +1,61 @@
+From a1a38e37342686f41763489ea396832f92816876 Mon Sep 17 00:00:00 2001
+From: Alex Gonzalez <alex.gonzalez@digi.com>
+Date: Mon, 20 May 2019 15:37:08 +0200
+Subject: [PATCH] dt-bindings: ASoC: fsl: add binding for imx-max98088 machine
+ driver
+
+This patch adds DT bindings for the i.MX SoCs that use a MAX98088 codec.
+
+Signed-off-by: Alex Gonzalez <alex.gonzalez@digi.com>
+---
+ .../bindings/sound/imx-audio-max98088.txt          | 41 ++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/sound/imx-audio-max98088.txt
+
+diff --git a/Documentation/devicetree/bindings/sound/imx-audio-max98088.txt b/Documentation/devicetree/bindings/sound/imx-audio-max98088.txt
+new file mode 100644
+index 000000000000..a171c70c1852
+--- /dev/null
++++ b/Documentation/devicetree/bindings/sound/imx-audio-max98088.txt
+@@ -0,0 +1,41 @@
++Freescale i.MX audio complex with MAX98088/MAX98089 codec
++
++Required properties:
++- compatible : "fsl,imx-audio-max98088","fsl,imx-audio-max98089"
++- model : The user-visible name of this sound complex
++- cpu-dai : The phandle of CPU dai
++- gpr : The phandle of i.MX IOMUXC GPR for managing SAI MCLK
++- audio-codec : The phandle of the MAX98088/MAX98089 audio codec
++- audio-routing : A list of the connections between audio components.
++  Each entry is a pair of strings, the first being the connection's sink,
++  the second being the connection's source. Valid names could be power
++  supplies, MAX98088/MAX98089 pins, and the jacks on the board.
++
++  e.g. Board connectors:
++   * Headphone Jack
++   * Ext Spk
++   * Mic1
++   * Mic2
++   * LineInA
++   * LineInB
++   * LineOut
++
++Not implemented:
++- Regulators for power supplies
++- Interrupt handling
++- Jack detection (JACKSNS)
++
++Example:
++
++sound {
++        compatible = "fsl,imx-audio-max98088";
++        model = "imx-max98088";
++        cpu-dai = <&ssi2>;
++        gpr = <&gpr>;
++        audio-codec = <&codec>;
++        audio-routing =
++                "Headphone Jack","HPL",
++                "Headphone Jack","HPR",
++                "Ext Spk","SPKL",
++                "Ext Spk","SPKR";
++};
