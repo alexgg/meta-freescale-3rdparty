@@ -32,6 +32,13 @@ SRC_URI_append_ccimx6ul = " \
 "
 
 SRC_URI_append_ccimx6ulsbcpro = " \
+    file://0001-ccimx6ulsbcpro-Add-IOEXP-core-I2C-support.patch \
+    file://0002-ccimx6ulsbcpro-Add-IOEXP-GPIO-support.patch \
+    file://0003-ccimx6ulsbcpro-Add-IOEXP-ADC-support.patch \
+    file://0004-ARM-dts-ccimx6ulsbcpro-Configure-touch-GPIO-reset-li.patch \
+"
+
+SRC_URI_append_ccimx6ulsbcpro = " \
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0001-ARM-dts-i.MX6UL-Add-ASRC-support.patch', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0002-dt-bindings-ASoC-fsl-add-binding-for-imx-max98088-ma.patch', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'alsa', 'file://0003-ASoC-fsl-Add-imx-max98088-machine-driver.patch', '', d)} \

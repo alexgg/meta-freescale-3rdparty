@@ -1,0 +1,31 @@
+From 20b46a398e2d5a65d3b72372deaf347206989299 Mon Sep 17 00:00:00 2001
+From: Alex Gonzalez <alex.gonzalez@digi.com>
+Date: Mon, 23 Apr 2018 11:48:15 +0200
+Subject: [PATCH] ccimx6ulsbcpro: Add IOEXP ADC support
+
+Signed-off-by: Alex Gonzalez <alex.gonzalez@digi.com>
+---
+ arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts b/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts
+index 1ddc7a90daa3..f9e28fdd0123 100644
+--- a/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts
++++ b/arch/arm/boot/dts/imx6ul-ccimx6ulsbcpro.dts
+@@ -185,6 +185,11 @@
+ 			interrupt-controller;
+ 			#interrupt-cells = <2>;
+ 		};
++
++		mca_ioexp_adc: adc {
++			compatible = "digi,mca-ioexp-adc";
++			digi,adc-vref = <3300000>;
++		};
+ 	};
+ };
+ 
+@@ -514,4 +519,3 @@
+ 		>;
+ 	};
+ };
+-
