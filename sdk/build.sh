@@ -112,7 +112,7 @@ for platform in ${DY_PLATFORMS}; do
 		# Configure and build the project in a sub-shell to avoid
 		# mixing environments between different platform's projects
 		(
-			TEMPLATECONF=${WORKSPACE}/config/${platform}  MACHINE=${platform} DISTRO=${DISTRO} EULA=1 source setup-environment ${platform}
+			MACHINE=${platform} DISTRO=${DISTRO} EULA=1 source setup-environment ${platform}
 			printf "${RM_WORK_CFG}" >> conf/local.conf
 			for target in ${DY_TARGET}; do
 				printf "\n[INFO] Building the $target target.\n"
