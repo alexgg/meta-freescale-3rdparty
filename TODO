@@ -1,0 +1,3 @@
+* Review ccimx6sbc.conf MACHINEOVERRIDES. It needs to define a suffix used with MACHINE_SOCARCH_SUFFIX_* whis is mx6q or mx6dl. The intention was to have a generic ccimx6sbc for both but it might not be possible, might need to be ccimx6qsbc and ccimx6dlsbc.
+* Test the system filesystem resizing with more than one block device, for example with a uSD card and the eMMC. The uSD card
+  was not working when the resizing script was introduced.
