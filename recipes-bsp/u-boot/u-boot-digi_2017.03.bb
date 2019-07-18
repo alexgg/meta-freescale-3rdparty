@@ -38,4 +38,4 @@ do_compile_append () {
 
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 
-COMPATIBLE_MACHINE = "(ccimx6ul)"
+COMPATIBLE_MACHINE = "(ccimx6ul|ccimx6sbc)"
