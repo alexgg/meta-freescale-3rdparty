@@ -2,6 +2,7 @@
 # U-Boot bootscript for images created by Yocto.
 #
 
-setenv fdt_file imx6q-ccimx6sbc.dtb
-setenv zimage zImage-ccimx6sbc.bin
-dboot linux mmc
+run bootargs_mmc_linux
+load mmc 0 ${loadaddr} zImage-initramfs-ccimx6sbc.bin
+load mmc 0 ${fdt_addr} imx6q-ccimx6sbc.dtb
+bootz ${loadaddr} - ${fdt_addr}
