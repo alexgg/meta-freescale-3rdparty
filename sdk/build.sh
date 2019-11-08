@@ -32,10 +32,6 @@ RM_WORK_CFG="
 INHERIT += \"rm_work\"
 "
 
-EXTRA_LAYERS='
-BBLAYERS += "${BSPDIR}/sources/meta-openembedded/meta-python ${BSPDIR}/sources/meta-openembedded/meta-networking\"
-'
-
 REPO="$(which repo)"
 
 error() {
@@ -118,7 +114,11 @@ for platform in ${DY_PLATFORMS}; do
 		(
 			MACHINE=${platform} DISTRO=${DISTRO} EULA=1 source setup-environment ${platform}
 			printf "${RM_WORK_CFG}" >> conf/local.conf
-			printf "${EXTRA_LAYERS}" >> conf/bblayers.conf
+			printf 'BBLAYERS += "${BSPDIR}/sources/meta-openembedded/meta-networking \"' >> conf/bblayers.conf
+			if ! grep -Fq meta-python conf/bblayers.conf; then
+				printf "\n" >> conf/bblayers.conf
+				printf 'BBLAYERS += "${BSPDIR}/sources/meta-openembedded/meta-python \"' >> conf/bblayers.conf
+			fi
 			for target in ${DY_TARGET}; do
 				printf "\n[INFO] Building the $target target.\n"
 				time bitbake ${target}
