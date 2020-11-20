@@ -7,7 +7,11 @@ do_image_boot_ubifs[depends] += " \
 "
 
 IMAGE_CMD_boot.ubifs() {
-	BOOTIMG_FILES_SYMLINK="${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin"
+        if [ ! -z "${INITRAMFS_IMAGE}" -a x"${INITRAMFS_IMAGE_BUNDLE}" = x1 ]; then
+	    BOOTIMG_FILES_SYMLINK="${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-initramfs-${MACHINE}.bin"
+        else
+	    BOOTIMG_FILES_SYMLINK="${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${MACHINE}.bin"
+        fi
 	if [ -n "${KERNEL_DEVICETREE}" ]; then
 		for DTB in ${KERNEL_DEVICETREE}; do
 			# Remove potential sub-folders
