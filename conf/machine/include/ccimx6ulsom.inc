@@ -29,6 +29,8 @@ MKUBIFS_BOOT_ARGS ?= "-m 2048 -e 126976 -c 255"
 # Max LEB count (-c 8191) calculated for a partition of up to 1 GiB considering 128 KiB erase-block size.
 MKUBIFS_ARGS ?= "-m 2048 -e 126976 -c 8191"
 
+UBINIZE_ARGS ?= "-p 128KiB -m 2048 -s 2048"
+
 IMAGE_CLASSES += "image_types_digi"
 # Overwrite the defaults in imx-base not to include wic images
 IMAGE_FSTYPES = "tar.bz2 ubifs boot.ubifs"
